@@ -1,0 +1,43 @@
+<div class="card w-75">
+    <div class="card-body">
+            <h4 class="text-center">Login</h4>
+            <form [formGroup] = 'loginForm' class="form mt-4" (submit)="login()">
+            
+                <div class="form-group">
+                    <input #userNameInput
+                        formControlName="login"
+                        class="form-control" 
+                        placeholder="Digite login" 
+                        autofocus> 
+            
+                    <app-mensagem-error
+                        *ngIf="loginForm.get('login').errors?.required"
+                        text="Senha é obrigatória!">
+                    </app-mensagem-error>
+            
+                </div>
+            
+                <div class="form-group">
+                    <input
+                        formControlName="senha"
+                        type="password" 
+                        class="form-control" 
+                        placeholder="Digite a senha">  
+                    <app-mensagem-error
+                        *ngIf="loginForm.get('senha').errors?.required"
+                        text="Senha é obrigatória!">
+                    </app-mensagem-error>           
+                </div>
+            
+                <button 
+                    [disabled]="loginForm.invalid"
+                    type="submit" 
+                    class="btn btn-primary btn-block">
+                    login
+                </button>
+            </form>
+      </div>
+</div>
+
+
+

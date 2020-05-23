@@ -1,0 +1,25 @@
+<form [formGroup]="listarForm"  (submit)="irParaCadastro()">
+  <h4 >Listar operador</h4>
+  <hr>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+  </div>
+  <div class="form-group">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Login</th>
+          <th scope="col">perfil</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let operador of operadores">
+          <td>{{operador.nome}}</td>
+          <td>{{operador.login}}</td>
+          <td>{{operador.perfil}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
