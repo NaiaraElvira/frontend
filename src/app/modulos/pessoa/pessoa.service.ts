@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Pessoa } from './pessoa';
 // import { Operador } from './operador';
 
 const API = 'http://localhost:8080/projeto-0.0.1-SNAPSHOT/resources';
@@ -8,8 +9,8 @@ const API = 'http://localhost:8080/projeto-0.0.1-SNAPSHOT/resources';
 export class PessoaService {
     constructor(private http: HttpClient){}
 
-    // listarOperador(){
-    //     return this.http.get<Operador[]>(API + '/pessoa');
-    // }
+    listarPessoa(){
+        return this.http.get<Pessoa[]>(API + '/pessoa');
+    }
 
 }

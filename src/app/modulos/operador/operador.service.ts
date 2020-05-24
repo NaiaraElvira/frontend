@@ -11,6 +11,9 @@ export class OperadorService {
     cadastrarOperador(p: Operador){
         return this.http.post(API + '/operador', p);
     }
+    alterarOperador(p: Operador){
+        return this.http.put(API + '/operador', p);
+    }
 
     consultarOperador(id: number){
         return this.http.get<Operador>(API + '/operador/' + id);

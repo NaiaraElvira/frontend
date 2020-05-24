@@ -2,12 +2,21 @@
   <nav class="navbar navbar-light bg-white">
       <a class="navbar-brand">SYSNAI=)</a>
 
+      <div *ngIf="(user$ | async) as user">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a  [routerLink]="['pessoa','listar']">Listar pessoa</a>
+          </div>
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a  [routerLink]="['operador','listar']">Listar Operador</a>
+          </div>
+      </div>
+
       <div *ngIf="(user$ | async) as user; else login">
           <i class="fa fa-user-circle mr-1"></i>
           <a class="mr-1">{{ user?.nome}}</a>
           <a (click)="logout()">(Logout)</a>
       </div>
-
+      
       <ng-template #login>
           <span class="navbar-text">
               <a [routerLink]="['']">Please, login!</a>

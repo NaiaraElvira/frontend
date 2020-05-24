@@ -14,9 +14,11 @@ const routers: Routes = [
     {path:'', pathMatch: 'full', redirectTo: 'home'},
     {path:'home', component: LoginComponent, canActivate: [AuthGuard]},
     {path:'pessoa/cadastrar', component: CadastrarPessoaComponent},
+    {path:'pessoa/cadastrar/:id', component: CadastrarPessoaComponent},
     {path:'pessoa/listar', component: ListarPessoaComponent},
     {path:'pessoa/visualizar', component: VisualizarPessoaComponent},
     {path:'operador/cadastrar', component: CadastrarOperadorComponent},
+    {path:'operador/cadastrar/:id', component: CadastrarOperadorComponent},
     {path:'operador/listar', component: ListarOperadorComponent},
     {path:'operador/visualizar', component: VisualizarOperadorComponent}
 ]

@@ -4,49 +4,44 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 
 import { OperadorService } from '../operador.service';
-import { Operator } from 'rxjs';
 import { Operador } from '../operador';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { OperadorModule } from '../operador.module';
 
 @Component({
   selector: 'app-cadastrar-operador',
   templateUrl: './cadastrar-operador.component.html',
-  styleUrls: ['./cadastrar-operador.component.css']
 })
 export class CadastrarOperadorComponent implements OnInit {
   cadastrarForm: FormGroup;
   perfils: any;
   operador: Operador;
 
-   constructor(fb: FormBuilder, private operadorService: OperadorService, private router: Router) 
+   constructor(private fb: FormBuilder, 
+    private operadorService: OperadorService, 
+    private router: Router,
+    private activatedRoute: ActivatedRoute) 
    {
-       this.cadastrarForm = fb.group({
-           nome: ["", Validators.required],
-           login: ["", Validators.required],
-           senha: ["", Validators.required],
-           perfil: ["", Validators.required]
-       });
+     
    }
 
   ngOnInit() {
-    this.operadorService.listarOperador().subscribe(
-      res => {
-        console.log('RESPOSTA ==> ', res);
-      },
-      err => {
-          console.log(err);
-      }
-    );
+    const operador = this.activatedRoute.snapshot.params.id;
+    this.cadastrarForm = this.fb.group({
+      nome: ["", Validators.required],
+      login: ["", Validators.required],
+      senha: ["", Validators.required],
+      perfil: ["", Validators.required]
+  });
+  operador && this.consultarOperador(operador);
 
     this.listarPerfils();
-     
   }
 
   listarPerfils(){
     this.operadorService.tipoPerfil().subscribe(
       res => {
         this.perfils = res;
-        console.log('RESPOSTA ==> ', res);
       },
       err => {
           console.log(err);
@@ -54,10 +49,14 @@ export class CadastrarOperadorComponent implements OnInit {
     );
   }
 
-  consultarOperador(){
-    this.operadorService.consultarOperador(1).subscribe(
+  consultarOperador(id: number){
+    this.operadorService.consultarOperador(id).subscribe(
       res => {
-        console.log('RESPOSTA 2==> ', res);
+        this.operador = res;
+        this.cadastrarForm.get('nome').setValue(this.operador.nome);
+        this.cadastrarForm.get('login').setValue(this.operador.login);
+        this.cadastrarForm.get('senha').setValue(this.operador.senha);
+        this.cadastrarForm.get('perfil').setValue(this.operador.perfil);
       },
       err => {
           console.log(err);
@@ -67,7 +66,28 @@ export class CadastrarOperadorComponent implements OnInit {
 
   cadastrarOperador() {
     console.log('USEUARIO => ', this.cadastrarForm.value);
-    this.operadorService.cadastrarOperador(this.cadastrarForm.value).subscribe(
+    if(!this.operador){
+      this.operadorService.cadastrarOperador(this.cadastrarForm.value).subscribe(
+        res => {
+          console.log('RESPOSTA 2==> ', res);
+        },
+        err => {
+            console.log(err);
+        }
+      );
+    }else{
+        this.editar();
+    }
+   
+  }
+
+  editar(){
+    let operadorTMP = this.cadastrarForm.value;
+    operadorTMP.id = this.operador.id;
+    operadorTMP.data_cadastro = this.operador.data_cadastro;
+
+    console.log('rrrrr => ', operadorTMP);
+    this.operadorService.alterarOperador(operadorTMP).subscribe(
       res => {
         console.log('RESPOSTA 2==> ', res);
       },
@@ -75,8 +95,8 @@ export class CadastrarOperadorComponent implements OnInit {
           console.log(err);
       }
     );
-  }
 
+  }
   voltar() {
     this.router.navigate(['operador','listar'])
   }

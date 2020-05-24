@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit{
         .authenticate(login, senha)
         .subscribe(
             () => {
-              this.router.navigate(['operador','listar'])
+              this.router.navigate(['pessoa','listar'])
             },
             err => {
                 console.log(err);

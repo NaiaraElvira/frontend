@@ -11,6 +11,7 @@
           <th scope="col">Nome</th>
           <th scope="col">Login</th>
           <th scope="col">perfil</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +19,9 @@
           <td>{{operador.nome}}</td>
           <td>{{operador.login}}</td>
           <td>{{operador.perfil}}</td>
+          <td>
+            <i class="btn fa fa-pencil mr-1" (click)="irParaEditar(operador.id)"></i>
+          </td>
         </tr>
       </tbody>
     </table>

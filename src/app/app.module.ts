@@ -7,6 +7,7 @@ import { AppRoutersModule } from './app.routers.module';
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
 import { OperadorModule } from './modulos/operador/operador.module';
+import { PessoaModule } from './modulos/pessoa/pessoa.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { OperadorModule } from './modulos/operador/operador.module';
     BrowserModule,
     ModulosModule,
     OperadorModule,
+    PessoaModule,
     AppRoutersModule,
     HomeModule,
     CoreModule

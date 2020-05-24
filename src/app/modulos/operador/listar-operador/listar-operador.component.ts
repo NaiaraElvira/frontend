@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-listar-operador',
   templateUrl: './listar-operador.component.html',
-  styleUrls: ['./listar-operador.component.css']
 })
 export class ListarOperadorComponent implements OnInit {
   listarForm: FormGroup;
@@ -25,7 +24,6 @@ export class ListarOperadorComponent implements OnInit {
     this.operadorService.listarOperador().subscribe(
       res => {
         this.operadores = res;
-        console.log('RESPOSTAs ==> ', this.operadores);
       },
       err => {
           console.log(err);
@@ -35,6 +33,10 @@ export class ListarOperadorComponent implements OnInit {
 
   irParaCadastro(){
     this.router.navigate(['operador','cadastrar'])
+  }
+
+  irParaEditar(id: number){
+    this.router.navigate(['operador','cadastrar', id])
   }
 
 }

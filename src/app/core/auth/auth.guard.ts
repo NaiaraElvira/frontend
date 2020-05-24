@@ -10,9 +10,12 @@ export class AuthGuard implements CanActivate{
     canActivate(route: ActivatedRouteSnapshot, 
     state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         console.log('ATIVANDO A GUARDA')
+        console.log("Current Url Path", state);
+
         if(this.userService.isLogged()){
             //rota que vai quando nao autorizado
             this.router.navigate(['pessoa', 'cadastrar']);
+
             return false;
         }
         // throw new Error("Method not implemented.");
