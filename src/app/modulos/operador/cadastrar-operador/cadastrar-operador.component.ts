@@ -55,9 +55,9 @@ export class CadastrarOperadorComponent implements OnInit {
         this.operador = res;
         this.cadastrarForm.get('nome').setValue(this.operador.nome);
         this.cadastrarForm.get('login').setValue(this.operador.login);
-        this.cadastrarForm.get('senha').setValue(this.operador.senha);
         this.cadastrarForm.get('perfil').setValue(this.operador.perfil);
-      },
+        this.cadastrarForm.get('senha').setValidators([]); // or clearValidators()
+        this.cadastrarForm.get('senha').updateValueAndValidity();      },
       err => {
           console.log(err);
       }
@@ -65,7 +65,10 @@ export class CadastrarOperadorComponent implements OnInit {
   }
 
   cadastrarOperador() {
-    console.log('USEUARIO => ', this.cadastrarForm.value);
+    let valorSenha = this.cadastrarForm.value.senha;
+    if(!valorSenha){
+      this.cadastrarForm.get('senha').setValue(this.operador.senha);
+    }
     if(!this.operador){
       this.operadorService.cadastrarOperador(this.cadastrarForm.value).subscribe(
         res => {
