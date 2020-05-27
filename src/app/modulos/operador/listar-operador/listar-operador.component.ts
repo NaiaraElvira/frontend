@@ -39,4 +39,17 @@ export class ListarOperadorComponent implements OnInit {
     this.router.navigate(['operador','cadastrar', id])
   }
 
+  excluirOperador(operador: Operador){
+    this.operadorService.excluirOperador(operador.id).subscribe(
+      res => {
+        let index = this.operadores.indexOf(operador);
+        this.operadores.splice(index, 1);
+       console.log(res);
+      },
+      err => {
+          console.log(err);
+      }
+    );
+  }
+
 }

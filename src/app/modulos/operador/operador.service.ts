@@ -27,4 +27,8 @@ export class OperadorService {
         return this.http.get<object>(API + '/operador/tipo-perfil');
     }
 
+    excluirOperador(id: number){
+        return this.http.delete(API + '/operador/'+id);
+    }
+
 }
