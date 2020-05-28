@@ -5,6 +5,8 @@ import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { CadastrarOperadorComponent } from './cadastrar-operador/cadastrar-operador.component';
 import { ListarOperadorComponent } from './listar-operador/listar-operador.component';
 import { VisualizarOperadorComponent } from './visualizar-operador/visualizar-operador.component';
+import { AlertsModule } from 'src/app/shared/component/alerts/alerts.module';
+import { MensagemErrorModule } from 'src/app/shared/component/mensagem-error/mensagem-error.module';
 
 
 
@@ -18,7 +20,10 @@ import { VisualizarOperadorComponent } from './visualizar-operador/visualizar-op
         CommonModule, 
         FormsModule,
         ReactiveFormsModule,
-        RouterModule
+        RouterModule,
+        AlertsModule,
+        MensagemErrorModule,
+
     ],
     providers: [
         // ActivatedRouteSnapshot

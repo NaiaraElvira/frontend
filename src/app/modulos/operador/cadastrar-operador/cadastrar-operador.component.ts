@@ -7,6 +7,7 @@ import { OperadorService } from '../operador.service';
 import { Operador } from '../operador';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { OperadorModule } from '../operador.module';
+import { AlertsService } from 'src/app/shared/component/alerts/alerts.service';
 
 @Component({
   selector: 'app-cadastrar-operador',
@@ -16,13 +17,17 @@ export class CadastrarOperadorComponent implements OnInit {
   cadastrarForm: FormGroup;
   perfils: any;
   operador: Operador;
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: false
+  };
 
    constructor(private fb: FormBuilder, 
     private operadorService: OperadorService, 
     private router: Router,
-    private activatedRoute: ActivatedRoute) 
-   {
-     
+    private activatedRoute: ActivatedRoute,
+    private alertService: AlertsService) 
+   { 
    }
 
   ngOnInit() {
@@ -72,6 +77,8 @@ export class CadastrarOperadorComponent implements OnInit {
     if(!this.operador){
       this.operadorService.cadastrarOperador(this.cadastrarForm.value).subscribe(
         res => {
+          this.alertService.success('Cadastrado com sucesso!!', this.options);
+          this.resetForm(this.cadastrarForm);
           console.log('RESPOSTA 2==> ', res);
         },
         err => {
@@ -84,15 +91,21 @@ export class CadastrarOperadorComponent implements OnInit {
    
   }
 
+  resetForm(form: FormGroup) {
+    form.reset();
+    Object.keys(form.controls).forEach(key => {
+      form.get(key).setErrors(null) ;
+    });
+  }
+
   editar(){
     let operadorTMP = this.cadastrarForm.value;
     operadorTMP.id = this.operador.id;
     operadorTMP.data_cadastro = this.operador.data_cadastro;
 
-    console.log('rrrrr => ', operadorTMP);
     this.operadorService.alterarOperador(operadorTMP).subscribe(
       res => {
-        console.log('RESPOSTA 2==> ', res);
+        this.alertService.success('Alterado com sucesso!!', this.options);
       },
       err => {
           console.log(err);
@@ -100,6 +113,7 @@ export class CadastrarOperadorComponent implements OnInit {
     );
 
   }
+  
   voltar() {
     this.router.navigate(['operador','listar'])
   }
