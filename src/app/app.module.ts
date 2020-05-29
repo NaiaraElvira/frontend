@@ -8,6 +8,7 @@ import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
 import { OperadorModule } from './modulos/operador/operador.module';
 import { PessoaModule } from './modulos/pessoa/pessoa.module';
+import { MensagemErrorModule } from './shared/component/mensagem-error/mensagem-error.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PessoaModule } from './modulos/pessoa/pessoa.module';
     PessoaModule,
     AppRoutersModule,
     HomeModule,
-    CoreModule
+    CoreModule,
+    MensagemErrorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate{
 
             return false;
         }
-        // throw new Error("Method not implemented.");
         return true;
     }
 

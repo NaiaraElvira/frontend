@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-
 
 import { OperadorService } from '../operador.service';
 import { Operador } from '../operador';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { OperadorModule } from '../operador.module';
 import { AlertsService } from 'src/app/shared/component/alerts/alerts.service';
+import { loginValidator } from 'src/app/shared/validators/login.validator';
+import { senhaValidator } from 'src/app/shared/validators/senha.validator';
 
 @Component({
   selector: 'app-cadastrar-operador',
@@ -34,8 +33,8 @@ export class CadastrarOperadorComponent implements OnInit {
     const operador = this.activatedRoute.snapshot.params.id;
     this.cadastrarForm = this.fb.group({
       nome: ["", Validators.required],
-      login: ["", Validators.required],
-      senha: ["", Validators.required],
+      login: ["", [Validators.required, loginValidator]],
+      senha: ["", [Validators.required, Validators.minLength(6), senhaValidator]],
       perfil: ["", Validators.required]
   });
   operador && this.consultarOperador(operador);
