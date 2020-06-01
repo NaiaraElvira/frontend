@@ -25,7 +25,8 @@
         [ngClass]="{'is-invalid': !cadastrarForm.get('login').valid && cadastrarForm.get('login').touched}"
         formControlName="login" 
         placeholder="Digite a login"
-        maxlength = 15>
+        maxlength = 15
+        appLetras>
         <app-mensagem-error
           *ngIf="cadastrarForm.get('login').errors?.required"
           text="Login é obrigatória!">

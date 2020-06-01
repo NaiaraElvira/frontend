@@ -12,7 +12,7 @@ import { MensagemErrorModule } from './shared/component/mensagem-error/mensagem-
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

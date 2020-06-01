@@ -7,6 +7,7 @@ import { ListarOperadorComponent } from './listar-operador/listar-operador.compo
 import { VisualizarOperadorComponent } from './visualizar-operador/visualizar-operador.component';
 import { AlertsModule } from 'src/app/shared/component/alerts/alerts.module';
 import { MensagemErrorModule } from 'src/app/shared/component/mensagem-error/mensagem-error.module';
+import { DirectivesModule } from 'src/app/shared/directives/directives.modules';
 
 
 
@@ -23,6 +24,7 @@ import { MensagemErrorModule } from 'src/app/shared/component/mensagem-error/men
         RouterModule,
         AlertsModule,
         MensagemErrorModule,
+        DirectivesModule,
 
     ],
     providers: [
